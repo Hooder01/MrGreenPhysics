@@ -10,8 +10,9 @@ public class BasicMovement : MonoBehaviour
     public float jumpForce;
 
     private Rigidbody rb; // calls rigidbody from object and given new data name? 
-    private float rotateSpeed;
+   
     private float boostSpeed = 5f;
+    private float rotateSpeed;
 
     void Start() 
     {
@@ -36,21 +37,7 @@ public class BasicMovement : MonoBehaviour
 
         
     } // separated function to keep tidy
-    void Jumping()
-    {
-        bool isGrounded;
-
-        float moveAlongY = Input.GetAxis("Vertical");
-
-        Vector3 jump = new Vector3(0, moveAlongY, 0) * jumpForce * Time.deltaTime;
-
-        if (Input.GetKeyDown("space"))
-        {
-            Debug.Log("Jumped!");
-        }
-
-        // fix this !!
-    }
+    
 
     void Update()
     {
