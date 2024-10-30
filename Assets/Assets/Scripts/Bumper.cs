@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Bumper : MonoBehaviour
 {
-    public bouncePlayer;
+    private float bouncePlayer;
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    
+    void FixedUpdate()
+    {
+
     }
 }
