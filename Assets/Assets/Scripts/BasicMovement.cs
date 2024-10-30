@@ -7,8 +7,8 @@ using UnityEngine;
 public class BasicMovement : MonoBehaviour
 {
     public float BaseSpeed; // public base speed for sonic that is zero by default (may or may not make private in the future)
-    private float jumpForce = 5f;
-    private bool isPlayerGrounded;
+    private float jumpForce = 4f;
+    bool isInAir = true; // false by deafult??
 
 
     private Rigidbody rb; // calls rigidbody from object and given new data name? 
@@ -19,12 +19,7 @@ public class BasicMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>(); // still have no fucking clue what this bit means tbh
-
-    }
-
-    void isOnCollsion()
-    {
-        isPlayerGrounded = true;
+        
     }
 
     void Movement()
@@ -54,15 +49,20 @@ public class BasicMovement : MonoBehaviour
   
     void onJump()
     {
-        /*float velocityY = (0, 2.0f, 0);*/
-
-        if(Input.GetKeyDown("space") && isPlayerGrounded) // this stops the debug!?
+        if (Input.GetKeyDown("space") && isInAir)
         {
-            Debug.Log("Space Pressed!");
+            Debug.Log("Pressed!");
 
-            Vector3 velocityY = new Vector3(0, jumpForce, 0) * Time.deltaTime;
-            isPlayerGrounded = false;
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse); // always make sure to add ForceMode!
+
+            if(Input.GetKeyDown("space") && isInAir)
+            {
+                Debug.Log("Calling ground!");
+
+                isInAir = false; //close!! but now he can only jump once!!
+            }
         }
+        //Forces Sonic to Jump into the air in Y postion
     }
 
     void Update()
