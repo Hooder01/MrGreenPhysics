@@ -7,7 +7,8 @@ using UnityEngine;
 public class BasicMovement : MonoBehaviour
 {
     public float BaseSpeed; // public base speed for sonic that is zero by default (may or may not make private in the future)
-    public float jumpForce;
+    private float jumpForce = 5f;
+    private bool isPlayerGrounded;
 
     private Rigidbody rb; // calls rigidbody from object and given new data name? 
    
@@ -17,8 +18,14 @@ public class BasicMovement : MonoBehaviour
     void Start() 
     {
         rb = GetComponent<Rigidbody>(); // still have no fucking clue what this bit means tbh
+        
     }
     
+    void isOnCollsion()
+    {
+        isPlayerGrounded = true;
+    }
+
     void Movement()
     {
         float moveAlongX = Input.GetAxis("Horizontal");
@@ -42,9 +49,23 @@ public class BasicMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, rotateTarget, 10 * Time.deltaTime);
         }
         // rotates Sonic to the pressed input in question
+
         
-    } // separated function to keep tidy
-    
+    } 
+   
+    void jump()
+    {
+        Vector3 jumping = new Vector3(0, 5f, 0);
+
+        if (Input.GetKeyDown("space") && isPlayerGrounded)
+        {
+            Debug.Log("Jump Pressed!"); // why is this no longer working!?
+
+            rb.AddForce(jumping * jumpForce, ForceMode.Impulse);
+            isPlayerGrounded = false;
+        }
+        //Makes Sonic jump on a basic key input (this will go under many changes)
+    }
 
     void Update()
     {
@@ -54,5 +75,7 @@ public class BasicMovement : MonoBehaviour
     void FixedUpdate()
     {
         Movement(); // calls movement as a function for use
+        jump();
+        
     }
 }
