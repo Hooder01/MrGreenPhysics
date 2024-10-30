@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
- 
+
 
 public class BasicMovement : MonoBehaviour
 {
@@ -10,17 +10,18 @@ public class BasicMovement : MonoBehaviour
     private float jumpForce = 5f;
     private bool isPlayerGrounded;
 
-    private Rigidbody rb; // calls rigidbody from object and given new data name? 
-   
-    /*private float boostSpeed = 5f;*/
-    
 
-    void Start() 
+    private Rigidbody rb; // calls rigidbody from object and given new data name? 
+
+    /*private float boostSpeed = 5f;*/
+
+
+    void Start()
     {
         rb = GetComponent<Rigidbody>(); // still have no fucking clue what this bit means tbh
-        
+
     }
-    
+
     void isOnCollsion()
     {
         isPlayerGrounded = true;
@@ -43,28 +44,25 @@ public class BasicMovement : MonoBehaviour
         rb.MovePosition(transform.position + movement);
 
 
-        if(movement != Vector3.zero) // Makes sure that movement is always using Vector3
+        if (movement != Vector3.zero) // Makes sure that movement is always using Vector3
         {
             Quaternion rotateTarget = Quaternion.LookRotation(movement);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotateTarget, 10 * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotateTarget, 10 /*edit this number for smooth turning*/ * Time.deltaTime);
         }
         // rotates Sonic to the pressed input in question
-
-        
-    } 
-   
-    void jump()
+    }
+  
+    void onJump()
     {
-        Vector3 jumping = new Vector3(0, 5f, 0);
+        /*float velocityY = (0, 2.0f, 0);*/
 
-        if (Input.GetKeyDown("space") && isPlayerGrounded)
+        if(Input.GetKeyDown("space") && isPlayerGrounded) // this stops the debug!?
         {
-            Debug.Log("Jump Pressed!"); // why is this no longer working!?
+            Debug.Log("Space Pressed!");
 
-            rb.AddForce(jumping * jumpForce, ForceMode.Impulse);
+            Vector3 velocityY = new Vector3(0, jumpForce, 0) * Time.deltaTime;
             isPlayerGrounded = false;
         }
-        //Makes Sonic jump on a basic key input (this will go under many changes)
     }
 
     void Update()
@@ -75,7 +73,7 @@ public class BasicMovement : MonoBehaviour
     void FixedUpdate()
     {
         Movement(); // calls movement as a function for use
-        jump();
+        onJump();
         
     }
 }
