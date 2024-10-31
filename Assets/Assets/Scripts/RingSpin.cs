@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RingSpin : MonoBehaviour
 {
-    float setSpeed = 10f;
+    float setSpeed = 25f;
 
     void FixedUpdate()
     {

@@ -15,6 +15,7 @@ public class BasicMovement : MonoBehaviour
     
 
     private Rigidbody rb; // calls rigidbody from object and given new data name? 
+    private Animation anim;
 
     /*private float boostSpeed = 5f;*/
 
@@ -22,6 +23,7 @@ public class BasicMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>(); // still have no fucking clue what this bit means tbh
+        anim = gameObject.GetComponent<Animation>();
         
     }
 

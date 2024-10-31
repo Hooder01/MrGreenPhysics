@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Bumper : MonoBehaviour
 {
-    private float bouncePlayer;
+    public GameObject player; // asks for player ref
+    Vector3 bounceForce;
 
-    // Update is called once per frame
-    void Update()
+    bool hasplayerTouched = false; // ???
+
+    void Start()
     {
-        
+        bounceForce = new Vector3(0.0f, 0.0f, 0.0f);
     }
-    
+
     void FixedUpdate()
     {
-
+        
     }
 }
