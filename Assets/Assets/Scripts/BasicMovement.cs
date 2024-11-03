@@ -60,10 +60,10 @@ public class BasicMovement : MonoBehaviour
 
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse); // always make sure to add ForceMode!
 
-            if(isInAir == true)
+            /*if(isInAir == true)
             {
                 isInAir = false; // these cancel each other!
-            }
+            }*/
         }
         //Forces Sonic to Jump into the air in Y postion on spacebar
     }
