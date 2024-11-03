@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class RingSpin : MonoBehaviour
 {
-    float setSpeed = 25f;
+    float setSpeed = 45f;
     int ringCount;
-
     public GameObject Ring; // 1!
+     
+    private AudioSource audioSource; // sound1
+    public AudioClip RingPickUp; //sound2
 
     void Start()
     {
         Ring = GameObject.Find("default"); // 2!
+        audioSource = GetComponent<AudioSource>(); //sound3
+       
     }
 
     void OnCollisionEnter(Collision collision)
     {
+        audioSource.clip = RingPickUp;
+        audioSource.Play();
+
         Debug.Log("Ring Gone!");
-         Destroy(Ring); // 3!
-        // play effect here!
+        Destroy(Ring); // 3!
+        
+        
     }
 
 
