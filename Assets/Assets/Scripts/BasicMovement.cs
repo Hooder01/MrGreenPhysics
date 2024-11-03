@@ -22,7 +22,7 @@ public class BasicMovement : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>(); // still have no fucking clue what this bit means tbh
+        rb = GetComponent<Rigidbody>(); // Grabs the rigidbody from within unity
         anim = gameObject.GetComponent<Animation>();
         
     }
