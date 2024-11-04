@@ -2,29 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MomentumBasedMovement
-{
 
-}
 
 public class BasicMovement : MonoBehaviour
 {
     public float BaseSpeed; // public base speed for sonic that is zero by default (may or may not make private in the future)
-    private float jumpForce = 4f;
-    bool isInAir = true; // true by default? should be false
-    
+
+    private float jumpForce = 4f; // Jumping1
+    bool isInAir = true; // jumping2
+    public GameObject callJumpBall; // jumpball context1
+    bool isJumpBallActive = false; // jumpball context2 (this will check in context very often!)
 
     private Rigidbody rb; // calls rigidbody from object and given new data name? 
     private Animation anim;
 
-    /*private float boostSpeed = 5f;*/
+    
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>(); // Grabs the rigidbody from within unity
         anim = gameObject.GetComponent<Animation>();
-        
+
+        callJumpBall = GameObject.Find("JumpBall"); // jumpball context3
+        Destroy(callJumpBall); 
+
+        // Somehow set up the boolean with the jumpball being destroy (same applies in the if statment)
     }
 
     void Movement()
@@ -33,13 +36,6 @@ public class BasicMovement : MonoBehaviour
         float moveAlongZ = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(moveAlongX, 0, moveAlongZ) * BaseSpeed * Time.deltaTime;
-
-        /*if (Input.GetKeyDown("right shift")) // make this hold?
-        {
-            Debug.Log("Boost active");
-
-            BaseSpeed = boostSpeed; // this works! but now how to bring it back down?
-        }*/
 
         rb.MovePosition(transform.position + movement);
 
@@ -60,10 +56,14 @@ public class BasicMovement : MonoBehaviour
 
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse); // always make sure to add ForceMode!
 
-            /*if(isInAir == true)
+            isJumpBallActive = true; // jumpball context4
+
+            if(isJumpBallActive = true) // jumpball context5
             {
-                isInAir = false; // these cancel each other!
-            }*/
+                Debug.Log("JumpBall is being called!"); // good this works!
+                
+                // how can we make the main player model go away temp?
+            }
         }
         //Forces Sonic to Jump into the air in Y postion on spacebar
     }
