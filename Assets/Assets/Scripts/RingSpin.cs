@@ -21,11 +21,15 @@ public class RingSpin : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         audioSource.clip = RingPickUp;
-        audioSource.Play();
+        
 
         Debug.Log("Ring Gone!");
         Destroy(Ring); // 3!
         
+        if(Ring == null)
+        {
+            audioSource.Play();
+        }
         
     }
 
