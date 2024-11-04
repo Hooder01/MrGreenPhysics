@@ -5,31 +5,40 @@ using UnityEngine;
 public class RingSpin : MonoBehaviour
 {
     float setSpeed = 45f;
-    int ringCount;
+    int ringCount = 0;
     public GameObject Ring; // 1!
-     
-    private AudioSource audioSource; // sound1
-    public AudioClip RingPickUp; //sound2
+
+    //
+    AudioSource SoundEffect;
+    bool playsound;
+    bool toggle;
+    // RingSound1
 
     void Start()
     {
         Ring = GameObject.Find("default"); // 2!
-        audioSource = GetComponent<AudioSource>(); //sound3
-       
+
+        //
+        SoundEffect = GetComponent<AudioSource>();
+        playsound = false; // never to be used on start up!
+        // RingSound2
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        audioSource.clip = RingPickUp;
-        
-
         Debug.Log("Ring Gone!");
-        Destroy(Ring); // 3!
-        
-        if(Ring == null)
+        ringCount++;
+        playsound = true;
+
+        if(playsound == true)
         {
-            audioSource.Play();
+            Debug.Log("Sound playing?");
+            SoundEffect.Play(); // why isn't this working?
         }
+
+        Destroy(Ring); 
+
+
         
     }
 
