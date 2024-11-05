@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DeathZone
   - HUD
+  - Music
   layers:
   - Default
   - TransparentFX

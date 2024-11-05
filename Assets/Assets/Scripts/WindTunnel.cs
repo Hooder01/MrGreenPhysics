@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class WindTunnel : MonoBehaviour
 {
-    private GameObject WindGem;
+    public GameObject WindGem;
     public GameObject callPlayer;
 
-    bool playerHasGem;
+    bool playerHasGem = false;
     bool hasplayertouched = false; // for debug only!
 
     void Start()
     {
-        //callPlayer = GameObject.Find("playerSonic");
+        
     }
 
     void OnCollisionEnter(Collision collision)
     {
         hasplayertouched = true;
-        if(hasplayertouched = true)
+        if(hasplayertouched == true)
         {
             Debug.Log("Touched!");
         }
