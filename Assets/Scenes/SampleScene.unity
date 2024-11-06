@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.57035506, g: 0.58160365, b: 0.5876465, a: 1}
+  m_IndirectSpecularColor: {r: 0.47942585, g: 0.48907673, b: 0.49423772, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2208,7 +2208,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4283153a3e03adb45bf7966a58982d33, type: 2}
+  - {fileID: 2100000, guid: 83ca2ef9882a3e24f88ce4ae979931d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2562,7 +2562,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1586277879
 Transform:
   m_ObjectHideFlags: 0
@@ -2745,6 +2745,7 @@ GameObject:
   - component: {fileID: 1905278182}
   - component: {fileID: 1905278181}
   - component: {fileID: 1905278186}
+  - component: {fileID: 1905278187}
   m_Layer: 0
   m_Name: playerSonic
   m_TagString: Player
@@ -2856,8 +2857,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4958cbc05fb4c44858d1fd1b3bfc50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseSpeed: 5
-  callJumpBall: {fileID: 1586277878}
+--- !u!95 &1905278187
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905278180}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8662acf1588e4f04f8ea91ef727b8011, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1925622637
 GameObject:
   m_ObjectHideFlags: 0
@@ -4591,7 +4609,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 331885558449003966}
-  - component: {fileID: 1139631177869494021}
   m_Layer: 0
   m_Name: Sonic Model
   m_TagString: Untagged
@@ -4599,21 +4616,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!111 &1139631177869494021
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1139631177869494020}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!4 &1144184764452049151
 Transform:
   m_ObjectHideFlags: 0
