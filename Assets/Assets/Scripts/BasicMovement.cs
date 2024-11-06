@@ -9,20 +9,18 @@ public class BasicMovement : MonoBehaviour
     public float BaseSpeed; // public base speed for sonic that is zero by default (may or may not make private in the future)
 
     private float jumpForce = 4f; // Jumping1
-    bool isInAir = true; // jumping2
+    bool isInAir = false;// jumping2
     public GameObject callJumpBall; // jumpball context1
-    bool isJumpBallActive = false; // jumpball context2 (this will check in context very often!)
+    bool isJumpBallActive; // jumpball context2 (this will check in context very often!)
 
     private Rigidbody rb; // calls rigidbody from object and given new data name? 
-    private Animation anim;
 
     
-
 
     void Start()
     {
         rb = GetComponent<Rigidbody>(); // Grabs the rigidbody from within unity
-        anim = gameObject.GetComponent<Animation>();
+        isInAir = false;
 
         callJumpBall = GameObject.Find("JumpBall"); // jumpball context3
         Destroy(callJumpBall); 
@@ -50,22 +48,15 @@ public class BasicMovement : MonoBehaviour
   
     void onJump()
     {
-        if (Input.GetKeyDown("space") && isInAir)
+        if (Input.GetKeyDown("space") && isInAir == true)
         {
             Debug.Log("Pressed!");
 
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse); // always make sure to add ForceMode!
 
-            isJumpBallActive = true; // jumpball context4
-
-            if(isJumpBallActive = true) // jumpball context5
-            {
-                Debug.Log("JumpBall is being called!"); // good this works!
-                
-                // how can we make the main player model go away temp?
-            }
         }
-        //Forces Sonic to Jump into the air in Y postion on spacebar
+        
+        // this not working now??
     }
 
     void Update()
@@ -75,7 +66,7 @@ public class BasicMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Movement(); // calls movement as a function for use
+        Movement(); 
         onJump();
         
     }
