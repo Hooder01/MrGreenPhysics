@@ -13,7 +13,7 @@ public class BasicMovement : MonoBehaviour
     private float jumpForce = 5f;
     bool isOnGround;
     private GameObject callJumpBall;
-    private GameObject callSonicMesh;
+    public GameObject callSonicMesh; // had to be made public cause unity!
 
     // a public gameobject for dectecting when going down slopes!
     
@@ -27,11 +27,7 @@ public class BasicMovement : MonoBehaviour
         isOnGround = true;
         callJumpBall = GameObject.Find("JumpBall"); 
         callJumpBall.SetActive(false);
-
-        callSonicMesh = GameObject.Find("Sonic");
-        // Set Active by deafult?
-
-        
+        // callSonicMesh isn't needed by default
     }
 
     void Movement()
@@ -66,9 +62,16 @@ public class BasicMovement : MonoBehaviour
 
         if(Input.GetKeyDown("space") && isOnGround == false)
         {
-            callJumpBall.SetActive(true);
             callSonicMesh.SetActive(false);
+
+            callJumpBall.SetActive(true);
+            
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+        }
+        else if(Input.GetKeyDown("space") && Input.GetKeyDown("space") && isOnGround == false)
+        {
+            Debug.Log("Send Sonic Foward via dash");
+            // this not being called?
         }
         
     }

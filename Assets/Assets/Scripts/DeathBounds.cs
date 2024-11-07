@@ -14,8 +14,8 @@ public class DeathBounds : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) // 3!
     {
-        Debug.Log("Player Dead?");
-        Destroy(callPlayer);
+        Debug.Log("call for reaspawn!");
+        callPlayer.SetActive(false);
 
         // needs to respawn sonic after
     }
