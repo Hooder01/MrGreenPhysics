@@ -2,33 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class jumpBallTEMP // just keeping the jump ball in here for now for the sake of my eyes
-{
-    /*public GameObject callJumpBall; // jumpball context1
-    bool isJumpBallActive; // jumpball context2 (this will check in context very often!)*/
 
-    /*callJumpBall = GameObject.Find("JumpBall"); // jumpball context3
-        Destroy(callJumpBall);*/
-}
 
 public class BasicMovement : MonoBehaviour
 {
     private float BaseSpeed = 1f; // public base speed for sonic that is zero by default (may or may not make private in the future)
     private float acceleration = 1f;
-    private float maxCapSpeed = 130f;
+    private float maxCapSpeed = 90f;
+
+    private float jumpForce = 5f;
+    bool isOnGround;
+    private GameObject callJumpBall;
+    private GameObject callSonicMesh;
 
     // a public gameobject for dectecting when going down slopes!
     
     private Rigidbody rb; // calls rigidbody from object and given new data name? 
 
-    private Animator SonicAnim;
+    
 
     void Start()
     {
         rb = GetComponent<Rigidbody>(); 
-        SonicAnim = GetComponent<Animator>();
+        isOnGround = true;
+        callJumpBall = GameObject.Find("JumpBall"); 
+        callJumpBall.SetActive(false);
 
-        SonicAnim.SetTrigger("TriggerIdle"); // this is not working!!
+        callSonicMesh = GameObject.Find("Sonic");
+        // Set Active by deafult?
+
+        
     }
 
     void Movement()
@@ -57,6 +60,25 @@ public class BasicMovement : MonoBehaviour
         // rotates Sonic to the pressed input in question
     }
   
+    void CallingJump()
+    {
+        isOnGround = false;
+
+        if(Input.GetKeyDown("space") && isOnGround == false)
+        {
+            callJumpBall.SetActive(true);
+            callSonicMesh.SetActive(false);
+            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+        }
+        
+    }
+
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Slope Collison here!");
+    }
+
 
     void Update()
     {
@@ -66,5 +88,6 @@ public class BasicMovement : MonoBehaviour
     void FixedUpdate()
     {
         Movement(); 
+        CallingJump();
     }
 }
