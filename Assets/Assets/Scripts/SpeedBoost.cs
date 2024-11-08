@@ -16,7 +16,7 @@ public class SpeedBoost : MonoBehaviour
    
     void OnCollisionEnter(Collision collision)
     {
-        
+        Debug.Log("Hit Pad?");
     }
 
 
