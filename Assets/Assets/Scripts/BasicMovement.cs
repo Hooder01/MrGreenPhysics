@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class SpinDashANDRolling // should we make this a class?
+{
 
+}
 
 public class BasicMovement : MonoBehaviour
 {
     private float BaseSpeed = 1f; // public base speed for sonic that is zero by default (may or may not make private in the future)
     private float acceleration = 1f;
-    private float maxCapSpeed = 90f;
+    private float maxCapSpeed = 60f;
 
     private float jumpForce = 5f;
     bool isOnGround;
@@ -19,7 +22,16 @@ public class BasicMovement : MonoBehaviour
     
     private Rigidbody rb; // calls rigidbody from object and given new data name? 
 
-    
+    struct RollingValues
+    {
+        private GameObject callingSlopes; // Will be used to identify certain geometry (possible via a tag but no clue yet)
+        private float rollBaseSpeed; // (no value! don't forget you twat)
+
+        if(Input.GetKeyDown("left shift")) // THE FUCK!? 
+
+        // no if statments in structs dumb dumb!
+
+    }
 
     void Start()
     {
@@ -28,6 +40,11 @@ public class BasicMovement : MonoBehaviour
         callJumpBall = GameObject.Find("JumpBall"); 
         callJumpBall.SetActive(false);
         // callSonicMesh isn't needed by default
+    }
+
+     void RollingMovement()
+    {
+        // Rolling Physcis will happen here (this call only be called during movement!)
     }
 
     void Movement()
@@ -55,7 +72,9 @@ public class BasicMovement : MonoBehaviour
         }
         // rotates Sonic to the pressed input in question
     }
-  
+    
+   
+
     void CallingJump()
     {
         isOnGround = false;
@@ -79,7 +98,7 @@ public class BasicMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Slope Collison here!");
+        // slope collision to go here ( I think? )
     }
 
 
