@@ -2,36 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpinDashANDRolling // should we make this a class?
-{
 
-}
 
 public class BasicMovement : MonoBehaviour
 {
-    private float BaseSpeed = 1f; // public base speed for sonic that is zero by default (may or may not make private in the future)
+    private float BaseSpeed = 1f; 
     private float acceleration = 1f;
     private float maxCapSpeed = 60f;
+    // basic speed values (ONLY change these for easy editing)
 
     private float jumpForce = 5f;
     bool isOnGround;
     private GameObject callJumpBall;
     public GameObject callSonicMesh; // had to be made public cause unity!
+    //Jumping Context
 
-    // a public gameobject for dectecting when going down slopes!
-    
-    private Rigidbody rb; // calls rigidbody from object and given new data name? 
 
-    struct RollingValues
+
+    private GameObject callingSlopes; // Will be used to identify certain geometry (possible via a tag but no clue yet)
+    struct RollingCalculations
     {
-        private GameObject callingSlopes; // Will be used to identify certain geometry (possible via a tag but no clue yet)
-        private float rollBaseSpeed; // (no value! don't forget you twat)
+         float rollBaseSpeed = 8f;
+         float topOfSlopeAverage;
+         float slopeCalculations;
 
-        if(Input.GetKeyDown("left shift")) // THE FUCK!? 
-
-        // no if statments in structs dumb dumb!
-
+        // slopes could be handeled by Tags?
     }
+    //Rolling&&SpinDash Context
+
+
+
+    private Rigidbody rb; 
+
+    
 
     void Start()
     {
@@ -42,9 +45,18 @@ public class BasicMovement : MonoBehaviour
         // callSonicMesh isn't needed by default
     }
 
-     void RollingMovement()
+    void CallingRolling()
     {
-        // Rolling Physcis will happen here (this call only be called during movement!)
+
+        // make sure this can only be called during movement!!
+        if(Input.GetKeyDown("left shift"))
+        {
+            callSonicMesh.SetActive(false);
+            callJumpBall.SetActive(true);
+
+            rb.AddForce(0, 0, rollBaseSpeed, ForceMode.Impulse);
+            // add if statement looking for "slope tag" here!
+        }
     }
 
     void Movement()
@@ -64,6 +76,7 @@ public class BasicMovement : MonoBehaviour
         }
         // return to a base speed?
 
+        
 
         if (movement != Vector3.zero) // Makes sure that movement is always using Vector3
         {
@@ -109,7 +122,8 @@ public class BasicMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Movement(); 
+        Movement();
+        CallingRolling();
         CallingJump();
     }
 }
