@@ -12,29 +12,18 @@ public class BasicMovement : MonoBehaviour
     // basic speed values (ONLY change these for easy editing)
 
     private float jumpForce = 5f;
+    private float fallingForce;
     bool isOnGround;
+    bool isInAir;
     private GameObject callJumpBall;
     public GameObject callSonicMesh; // had to be made public cause unity!
     //Jumping Context
 
-
-
-    private GameObject callingSlopes; // Will be used to identify certain geometry (possible via a tag but no clue yet)
-    struct RollingCalculations
-    {
-         float rollBaseSpeed = 8f;
-         float topOfSlopeAverage;
-         float slopeCalculations;
-
-        // slopes could be handeled by Tags?
-    }
-    //Rolling&&SpinDash Context
-
-
-
     private Rigidbody rb; 
 
-    
+    private Vector3 basePosition = new Vector3(0, 0 ,0);
+    bool canSonicRoll;
+    //Advanced Movement
 
     void Start()
     {
@@ -45,19 +34,7 @@ public class BasicMovement : MonoBehaviour
         // callSonicMesh isn't needed by default
     }
 
-    void CallingRolling()
-    {
-
-        // make sure this can only be called during movement!!
-        if(Input.GetKeyDown("left shift"))
-        {
-            callSonicMesh.SetActive(false);
-            callJumpBall.SetActive(true);
-
-            rb.AddForce(0, 0, rollBaseSpeed, ForceMode.Impulse);
-            // add if statement looking for "slope tag" here!
-        }
-    }
+    
 
     void Movement()
     {
@@ -84,6 +61,10 @@ public class BasicMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, rotateTarget, 5 /*edit this number for smooth turning*/ * Time.deltaTime);
         }
         // rotates Sonic to the pressed input in question
+
+
+        
+        // Looks for Sonics Physics in the air and how it should drop him (Look for "Calling Jump" below!)
     }
     
    
@@ -99,11 +80,6 @@ public class BasicMovement : MonoBehaviour
             callJumpBall.SetActive(true);
             
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-        }
-        else if(Input.GetKeyDown("space") && Input.GetKeyDown("space") && isOnGround == false)
-        {
-            Debug.Log("Send Sonic Foward via dash");
-            // this not being called?
         }
         
     }
@@ -123,7 +99,6 @@ public class BasicMovement : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
-        CallingRolling();
         CallingJump();
     }
 }
