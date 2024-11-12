@@ -6,28 +6,16 @@ using UnityEngine;
 
 public class BasicMovement : MonoBehaviour
 {
-    string[] callBug = { "JumpBall Found!", "JumpBall NOT Found!", "Sonic Mesh Found!", "Sonic Mesh NOT Found!", "Player standing still?", "This Item is not being called" }; // An Array of Debug commands that can be called anywhere (only USE with Debug.Log)
+    string[] callBug = { "JumpBall Found!", "JumpBall NOT Found!", "Sonic Mesh Found!", "Sonic Mesh NOT Found!", "This Item is not being called", "this item is working!" }; // An Array of Debug commands that can be called anywhere (only USE with Debug.Log)
 
     private float BaseSpeed = 1f; 
     private float acceleration = 1f;
     private float maxCapSpeed = 60f;
     // basic speed values (ONLY change these for easy editing)
 
-    private float jumpForce = 5f;
-    private float fallingForce;
-    bool isOnGround;
-    bool isInAir;
-    private GameObject callJumpBall;
-    public GameObject callSonicMesh; // had to be made public cause unity!
-    //Jumping Context
-
-    private float rollBaseSpeed = 50f; // this should be calucalted along with the base movement
-    private float downSlopeSpeed = 10f;  // yet to be used!
-    // (change these when needed)
-    bool isRolling;
-    bool isSlope;
-    bool isTopOfSlope;
-    //Rolling and SpinDash Context
+    private float sonicMassOnAverage;
+    private float gravityPullAverage = -9.0f;
+    // (Physics also for easy editing) // MAKE THIS PUBLIC FOR DEMO?
 
 
 
@@ -37,13 +25,10 @@ public class BasicMovement : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>(); 
-        isOnGround = true;
-        callJumpBall = GameObject.Find("JumpBall"); 
-        callJumpBall.SetActive(false);
-        // callSonicMesh isn't needed by default
+        rb = GetComponent<Rigidbody>();
+        rb.mass = sonicMassOnAverage;
 
-        isRolling = false;
+        Physics.gravity = new Vector3(0, gravityPullAverage, 0);
     }
 
     
@@ -79,45 +64,6 @@ public class BasicMovement : MonoBehaviour
         // Looks for Sonics Physics in the air and how it should drop him (Look for "Calling Jump" below!)
     }
 
-    void CallingRolling()
-    {
-
-        // make sure this can only be called during movement!!
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            callJumpBall.SetActive(true);
-            callSonicMesh.SetActive(false);
-            isRolling = true;
-
-            if (callJumpBall == true && callSonicMesh == false && isRolling == true)
-            {
-                rb.AddForce(0, rollBaseSpeed, 0, ForceMode.Impulse);
-                if(rollBaseSpeed != 50)
-                {
-                    Debug.Log(callBug[5]);
-                }
-            }
-            else if(callJumpBall == false)
-            {
-                Debug.Log(callBug[1]); // (FailSafe)
-            }
-        }
-    }
-
-    void CallingJump()
-    {
-        isOnGround = false;
-
-        if(Input.GetKeyDown("space") && isOnGround == false)
-        {
-            callSonicMesh.SetActive(false);
-
-            callJumpBall.SetActive(true);
-            
-            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-        }
-        
-    }
 
 
     void OnCollisionEnter(Collision collision)
@@ -134,7 +80,5 @@ public class BasicMovement : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
-        CallingRolling();
-        CallingJump();
     }
 }

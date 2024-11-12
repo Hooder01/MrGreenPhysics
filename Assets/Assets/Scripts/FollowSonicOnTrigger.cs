@@ -18,7 +18,7 @@ public class FollowSonicOnTrigger : MonoBehaviour
 
     void Start()
     {
-        camSets point = new camSets(); // FIX THIS!!
+        
     }
 
 

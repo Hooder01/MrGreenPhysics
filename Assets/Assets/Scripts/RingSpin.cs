@@ -8,38 +8,18 @@ public class RingSpin : MonoBehaviour
     int ringCount = 0;
     public GameObject Ring; // 1!
 
-    //
-    AudioSource SoundEffect;
-    bool playsound;
-    bool toggle;
-    // RingSound1
+    
 
     void Start()
     {
         Ring = GameObject.Find("default"); // 2!
 
-        //
-        SoundEffect = GetComponent<AudioSource>();
-        playsound = false; // never to be used on start up!
-        // RingSound2
+        
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Ring Gone!");
-        ringCount++;
-        playsound = true;
-
-        if(playsound == true)
-        {
-            Debug.Log("Sound playing?");
-            SoundEffect.Play(); // why isn't this working?
-        }
-
-        Destroy(Ring); 
-
-
-        
+        Destroy(Ring);        
     }
 
 
