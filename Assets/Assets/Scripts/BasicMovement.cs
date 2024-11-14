@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public class MassAndPhys
+{
+    private float sonicMassOnAverage;
+    private float gravityPullAverage = -5.0f;
+    // (Gravity also for easy editing) // MAKE THIS PUBLIC FOR DEMO?
+}
 
 public class BasicMovement : MonoBehaviour
 {
@@ -13,9 +18,7 @@ public class BasicMovement : MonoBehaviour
     private float maxCapSpeed = 60f;
     // basic speed values (ONLY change these for easy editing)
 
-    private float sonicMassOnAverage;
-    private float gravityPullAverage = -5.0f;
-    // (Gravity also for easy editing) // MAKE THIS PUBLIC FOR DEMO?
+    
 
     private float BaseJump =  5; // (Edit this if you don't like the feeling of the jump)
     public GameObject callingJumpBall; // This asks for the Jumpball model in the inspector (it can be called via private but you need to declare .find in Start() )
@@ -32,9 +35,9 @@ public class BasicMovement : MonoBehaviour
         callingModelSelf.SetActive(true); // (This should always be true on default)
 
         rb = GetComponent<Rigidbody>();
-        rb.mass = sonicMassOnAverage;
+        //rb.mass = sonicMassOnAverage;
 
-        Physics.gravity = new Vector3(0, gravityPullAverage, 0); // (Jump not working because of the gravity!?)
+        //Physics.gravity = new Vector3(0, gravityPullAverage, 0); // (This is called off since it intefears with jumpCalling atm)
 
         // 
         isJumpBallActive = false;
@@ -78,13 +81,17 @@ public class BasicMovement : MonoBehaviour
 
     void jumpCalling()
     {
-        
         isJumpBallActive = true;
+        bool isAlreadyAir = false;
 
         if(Input.GetKeyDown("space") && isJumpBallActive == true)
         {
-            Debug.Log(callBug[5]);
+            
             rb.AddForce(transform.up * BaseJump, ForceMode.Impulse);
+        }
+        else if(isAlreadyAir == false)
+        {
+
         }
     }   
 

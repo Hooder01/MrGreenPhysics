@@ -20,10 +20,10 @@ public class WindTunnel : MonoBehaviour
         hasplayertouched = true;
         if(hasplayertouched == true)
         {
-            Debug.Log("Touched!");
+            callPlayer.transform.position = new Vector3(0, 1, 50);
         }
 
-        callPlayer.transform.position = new Vector3(0, 1, 50);
+        
 
     }
 
