@@ -14,10 +14,14 @@ public class BasicMovement : MonoBehaviour
     // basic speed values (ONLY change these for easy editing)
 
     private float sonicMassOnAverage;
-    private float gravityPullAverage = -9.0f;
-    // (Physics also for easy editing) // MAKE THIS PUBLIC FOR DEMO?
+    private float gravityPullAverage = -5.0f;
+    // (Gravity also for easy editing) // MAKE THIS PUBLIC FOR DEMO?
 
-
+    private float BaseJump =  5; // (Edit this if you don't like the feeling of the jump)
+    public GameObject callingJumpBall; // This asks for the Jumpball model in the inspector (it can be called via private but you need to declare .find in Start() )
+    public GameObject callingModelSelf; // same as Jumpball but for the use of Sonics model (this may not be needed depending on how the booleans want to behave)
+    bool isJumpBallActive;
+    // (all jumping related, DO NOT REMOVE THESE BOOLEANS!)
 
     private Rigidbody rb; 
 
@@ -25,10 +29,18 @@ public class BasicMovement : MonoBehaviour
 
     void Start()
     {
+        callingModelSelf.SetActive(true); // (This should always be true on default)
+
         rb = GetComponent<Rigidbody>();
         rb.mass = sonicMassOnAverage;
 
-        Physics.gravity = new Vector3(0, gravityPullAverage, 0);
+        Physics.gravity = new Vector3(0, gravityPullAverage, 0); // (Jump not working because of the gravity!?)
+
+        // 
+        isJumpBallActive = false;
+        callingJumpBall.SetActive(false);
+
+        // (DO NOT EDIT THESE!)
     }
 
     
@@ -64,7 +76,17 @@ public class BasicMovement : MonoBehaviour
         // Looks for Sonics Physics in the air and how it should drop him (Look for "Calling Jump" below!)
     }
 
+    void jumpCalling()
+    {
+        
+        isJumpBallActive = true;
 
+        if(Input.GetKeyDown("space") && isJumpBallActive == true)
+        {
+            Debug.Log(callBug[5]);
+            rb.AddForce(transform.up * BaseJump, ForceMode.Impulse);
+        }
+    }   
 
     void OnCollisionEnter(Collision collision)
     {
@@ -74,11 +96,12 @@ public class BasicMovement : MonoBehaviour
 
     void Update()
     {
-
+        // (this is most likey never needed if the case of Sonic)
     }
 
     void FixedUpdate()
     {
         Movement();
+        jumpCalling(); // (this could be temp)
     }
 }
