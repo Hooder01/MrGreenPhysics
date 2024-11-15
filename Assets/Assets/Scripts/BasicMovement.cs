@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MassAndPhys
+/*public class MassAndPhys
 {
     private float sonicMassOnAverage;
     private float gravityPullAverage = -5.0f;
-    // (Gravity also for easy editing) // MAKE THIS PUBLIC FOR DEMO?
-}
+    // (Gravity also for easy editing) (CURRENT NOT IN USE!)
+}*/
 
 public class BasicMovement : MonoBehaviour
 {
     string[] callBug = { "JumpBall Found!", "JumpBall NOT Found!", "Sonic Mesh Found!", "Sonic Mesh NOT Found!", "This Item is not being called", "this item is working!" }; // An Array of Debug commands that can be called anywhere (only USE with Debug.Log)
 
-    private float BaseSpeed = 1f; 
+    public float BaseSpeed = 1f; 
     private float acceleration = 1f;
     private float maxCapSpeed = 60f;
     // basic speed values (ONLY change these for easy editing)
@@ -29,10 +29,14 @@ public class BasicMovement : MonoBehaviour
     private Rigidbody rb; 
 
     
+    
+        
+    
 
     void Start()
     {
         callingModelSelf.SetActive(true); // (This should always be true on default)
+        //MassAndPhys classObject = new MassAndPhys(); // (calling public Mass and Physics class)
 
         rb = GetComponent<Rigidbody>();
         //rb.mass = sonicMassOnAverage;
@@ -74,26 +78,22 @@ public class BasicMovement : MonoBehaviour
         }
         // rotates Sonic to the pressed input in question
 
-
-        
-        // Looks for Sonics Physics in the air and how it should drop him (Look for "Calling Jump" below!)
-    }
-
-    void jumpCalling()
-    {
+        //
         isJumpBallActive = true;
-        bool isAlreadyAir = false;
+        //bool isAlreadyAir = false;
 
         if(Input.GetKeyDown("space") && isJumpBallActive == true)
         {
-            
             rb.AddForce(transform.up * BaseJump, ForceMode.Impulse);
+            callingJumpBall.SetActive(true);
+            callingModelSelf.SetActive(false);
+            //isAlreadyAir = true;
         }
-        else if(isAlreadyAir == false)
-        {
+       
+        // Jump Context
+    }
 
-        }
-    }   
+    
 
     void OnCollisionEnter(Collision collision)
     {
@@ -109,6 +109,6 @@ public class BasicMovement : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
-        jumpCalling(); // (this could be temp)
+        
     }
 }
