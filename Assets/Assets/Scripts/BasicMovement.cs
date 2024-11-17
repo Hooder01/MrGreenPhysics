@@ -39,6 +39,7 @@ public class BasicMovement : MonoBehaviour
         //MassAndPhys classObject = new MassAndPhys(); // (calling public Mass and Physics class)
 
         rb = GetComponent<Rigidbody>();
+
         //rb.mass = sonicMassOnAverage;
 
         //Physics.gravity = new Vector3(0, gravityPullAverage, 0); // (This is called off since it intefears with jumpCalling atm)

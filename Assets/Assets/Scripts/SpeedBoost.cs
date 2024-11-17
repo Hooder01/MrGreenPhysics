@@ -28,9 +28,7 @@ public class SpeedBoost : MonoBehaviour
    
     void OnCollisionEnter(Collision collision)
     {
-        BasicMovement.BaseSpeed = 4; 
         
-        BasicMovement.BaseSpeed();
     }
 
 
