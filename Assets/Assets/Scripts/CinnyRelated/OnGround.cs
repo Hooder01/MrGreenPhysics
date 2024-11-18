@@ -5,40 +5,47 @@ using UnityEngine;
 public class OnGround : MonoBehaviour
 {
 
-    private RigidBody rb;
-    private float jogSpeed;
-    private float onSprintSpeed;
+    private Rigidbody rb;
+    private float jogSpeed = 2.5f;
+    private float SprintSpeed;
     private float jumpForce;
     private float gravityForce;
 
-    public struct BooleanObjects // remember to test this!
-    {
-        bool isSprinting = false;
-        bool isjumping = false;
-        bool isDoubleJump = false;
-        bool isInAir = false;
-        bool isGlideing = false;
-    }
+    
+     bool isJogging;
+     
+    
 
     // what abilities does Cinny have compared too Sonic?
 
     private void Start()
     {
-        rb = GetComponent<RigidBody>();
+        rb = GetComponent<Rigidbody>();
+        isJogging = false; // fix this (1)
     }
 
-    public groundMovement()
+    void OnGroundMovement()
     {
+        float moveOnX = Input.GetAxis("Horizontal");
+        float moveOnZ = Input.GetAxis("Vertical");
 
+        Vector3 baseMovement = new Vector3(moveOnX, 0, moveOnZ) * jogSpeed * Time.deltaTime;
+
+        rb.MovePosition(transform.position + baseMovement);
+        isJogging = true; // (2)
     }
-
-    private void EnterCollsion(Collsion collsion)
+    
+    void OnSprintMovement()
     {
-
+        if(Input.GetKeyDown("right shift") && isJogging == true) // (3)
+        {
+            Debug.Log("pressed!");
+        }
     }
     
     public void FixedUpdate()
     {
-        
+        OnGroundMovement();
+        OnSprintMovement();
     }
 }
