@@ -21,7 +21,7 @@ public class OnGround : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        isJogging = false; // fix this (1)
+        
     }
 
     void OnGroundMovement()
@@ -32,7 +32,12 @@ public class OnGround : MonoBehaviour
         Vector3 baseMovement = new Vector3(moveOnX, 0, moveOnZ) * jogSpeed * Time.deltaTime;
 
         rb.MovePosition(transform.position + baseMovement);
-        isJogging = true; // (2)
+        
+        if(baseMovement != Vector3.zero)
+        {
+            Quaternion rotateTarget = Quaternion.LookRotation(baseMovement);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotateTarget, 5 * Time.deltaTime);
+        }
     }
     
     void OnSprintMovement()
