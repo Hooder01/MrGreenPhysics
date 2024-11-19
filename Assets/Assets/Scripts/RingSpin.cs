@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class RingSpin : MonoBehaviour
 {
-    float setSpeed = 45f;
+    float setSpeed = 45f; // (only edit this!)
     
-    public GameObject Ring; // 1!
+    public GameObject Ring; 
 
     
 
     void Start()
     {
-        Ring = GameObject.Find("default"); // 2!
+        Ring = GameObject.Find("default"); 
     }
 
     void OnCollisionEnter(Collision collision)
@@ -23,6 +23,6 @@ public class RingSpin : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.Rotate(0f, setSpeed * Time.deltaTime, 0f, Space.Self); // this can be used to spin any object on the Y Axis
+        transform.Rotate(0f, setSpeed * Time.deltaTime, 0f, Space.Self); 
     }
 }

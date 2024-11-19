@@ -23,7 +23,8 @@ public class BasicMovement : MonoBehaviour
     private float BaseJump =  5; // (Edit this if you don't like the feeling of the jump)
     public GameObject callingJumpBall; // This asks for the Jumpball model in the inspector (it can be called via private but you need to declare .find in Start() )
     public GameObject callingModelSelf; // same as Jumpball but for the use of Sonics model (this may not be needed depending on how the booleans want to behave)
-    bool isJumpBallActive;
+    
+    bool isGrounded;
     // (all jumping related, DO NOT REMOVE THESE BOOLEANS!)
 
     private Rigidbody rb; 
@@ -36,6 +37,10 @@ public class BasicMovement : MonoBehaviour
     void Start()
     {
         callingModelSelf.SetActive(true); // (This should always be true on default)
+        isGrounded = true;
+        callingJumpBall.SetActive(false);
+
+
         //MassAndPhys classObject = new MassAndPhys(); // (calling public Mass and Physics class)
 
         rb = GetComponent<Rigidbody>();
@@ -44,9 +49,8 @@ public class BasicMovement : MonoBehaviour
 
         //Physics.gravity = new Vector3(0, gravityPullAverage, 0); // (This is called off since it intefears with jumpCalling atm)
 
-        // 
-        isJumpBallActive = false;
-        callingJumpBall.SetActive(false);
+        
+      
 
         // (DO NOT EDIT THESE!)
     }
@@ -72,7 +76,7 @@ public class BasicMovement : MonoBehaviour
 
         
 
-        if (movement != Vector3.zero) // Makes sure that movement is always using Vector3
+        if (movement != Vector3.zero) 
         {
             Quaternion rotateTarget = Quaternion.LookRotation(movement);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotateTarget, 5 /*edit this number for smooth turning*/ * Time.deltaTime);
@@ -80,36 +84,36 @@ public class BasicMovement : MonoBehaviour
         // rotates Sonic to the pressed input in question
 
         //
-        isJumpBallActive = true;
-        //bool isAlreadyAir = false;
+        
+    }
 
-        if(Input.GetKeyDown("space") && isJumpBallActive == true)
+
+    void callingJump()
+    {
+        if(Input.GetKeyDown("space"))
         {
-            rb.AddForce(transform.up * BaseJump, ForceMode.Impulse);
+            isGrounded = false;
+            rb.AddForce(0, BaseJump , 0 , ForceMode.Impulse);
             callingJumpBall.SetActive(true);
             callingModelSelf.SetActive(false);
-            //isAlreadyAir = true;
+
+            isGrounded = true;
         }
-       
-        // Jump Context
     }
-
-    
-
-    void OnCollisionEnter(Collision collision)
+        
+    void backOnGround()
     {
-        // slope collision to go here ( I think? )
-    }
-
-
-    void Update()
-    {
-        // (this is most likey never needed if the case of Sonic)
+        if(isGrounded == true)
+        {
+            callingJumpBall.SetActive(false);
+            callingModelSelf.SetActive(true);
+        }
     }
 
     void FixedUpdate()
     {
         Movement();
-        
+        callingJump();
+        backOnGround(); // (Temp)
     }
 }
