@@ -5,23 +5,23 @@ using UnityEngine;
 public class DeathBounds : MonoBehaviour
 {
 
-    private GameObject callPlayer; // 1!
-    bool isScreenFaded;
-
+    private GameObject callPlayer; 
+    private GameObject CheckPoint1;
+    bool hasPassedCheckPoint;
     void Start()
     {
-        callPlayer = GameObject.Find("playerSonic"); // 2!
-        isScreenFaded = false;
+        callPlayer = GameObject.Find("playerSonic"); 
     }
 
-    void OnCollisionEnter(Collision collision) // 3!
+    void OnCollisionEnter(Collision collision) 
     {
-        Debug.Log("call for reaspawn!");
-
-        callPlayer.transform.position = new Vector3(0, 1, 0);
-
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("call for reaspawn!"); // is this printing?
+            callPlayer.transform.position = new Vector3(0, 1, 0);
+        }
         
     }
 
-    // will destroy player/kill on contact (context if player goes outta bounds) 
+    
 }

@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class BasicMovement : MonoBehaviour
 {
-    string[] callBug = { "JumpBall Found!", "JumpBall NOT Found!", "Sonic Mesh Found!", "Sonic Mesh NOT Found!", "This Item is not being called", "this item is working!" }; // An Array of Debug commands that can be called anywhere (only USE with Debug.Log)
+    string[] callBug = { "JumpBall Found!", "JumpBall NOT Found!", "Sonic Mesh Found!", "Collision Found!", "This Item is not being called", "this item is working!" }; // An Array of Debug commands that can be called anywhere (only USE with Debug.Log)
 
     public float BaseSpeed = 1f; 
     private float acceleration = 1f;
@@ -20,27 +20,25 @@ public class BasicMovement : MonoBehaviour
 
     
 
-    private float BaseJump =  5; // (Edit this if you don't like the feeling of the jump)
-    public GameObject callingJumpBall; // This asks for the Jumpball model in the inspector (it can be called via private but you need to declare .find in Start() )
-    public GameObject callingModelSelf; // same as Jumpball but for the use of Sonics model (this may not be needed depending on how the booleans want to behave)
-    
-    bool isGrounded;
+    private float BaseJump =  5; // (Edit this if you don't like the float of the jump)
+    public GameObject callingJumpBall; //(set these both to private in the future)
+    public GameObject callingModelSelf; //
+    bool isOnGround;
+    float ballcenter = 0.0f;
+    float ballradius = 0.5f;
     // (all jumping related, DO NOT REMOVE THESE BOOLEANS!)
 
     private Rigidbody rb; 
 
-    
-    
-        
-    
 
     void Start()
     {
-        callingModelSelf.SetActive(true); // (This should always be true on default)
-        isGrounded = true;
+        
         callingJumpBall.SetActive(false);
-
-
+        callingModelSelf.SetActive(true); 
+        isOnGround = true;
+        
+        
         //MassAndPhys classObject = new MassAndPhys(); // (calling public Mass and Physics class)
 
         rb = GetComponent<Rigidbody>();
@@ -48,11 +46,7 @@ public class BasicMovement : MonoBehaviour
         //rb.mass = sonicMassOnAverage;
 
         //Physics.gravity = new Vector3(0, gravityPullAverage, 0); // (This is called off since it intefears with jumpCalling atm)
-
         
-      
-
-        // (DO NOT EDIT THESE!)
     }
 
     
@@ -92,28 +86,40 @@ public class BasicMovement : MonoBehaviour
     {
         if(Input.GetKeyDown("space"))
         {
-            isGrounded = false;
-            rb.AddForce(0, BaseJump , 0 , ForceMode.Impulse);
+            isOnGround = false; // this dosesn't do anything (fix that)
+            
+            rb.AddForce(0, BaseJump , 0 , ForceMode.Impulse); 
             callingJumpBall.SetActive(true);
             callingModelSelf.SetActive(false);
+            if(Input.GetKeyDown("space") & Input.GetKeyDown("space")) // (if player tries to double jump)
+            {
+                Debug.Log(callBug[5]);
+            }
+        }
+    }
 
-            isGrounded = true;
-        }
-    }
-        
-    void backOnGround()
+    void OnCollisionEnter(Collision collision) // Sonic can now collide with anything (as long as he has his colider attached)
     {
-        if(isGrounded == true)
+        if(collision.gameObject.CompareTag("Floors")) // Sonic (or the jumpball) looks for the "Floors" tag which has been added to the "Ground" objects in the test world
         {
-            callingJumpBall.SetActive(false);
+            Debug.Log(callBug[3]); 
+            isOnGround = true;
             callingModelSelf.SetActive(true);
+            callingJumpBall.SetActive(false);
+
+            if(isOnGround != true && callingJumpBall != false && callingModelSelf == true)
+            {
+                Debug.Log(callBug[4]); // (FailSafe)
+                // restart scene!
+            }
         }
     }
+
 
     void FixedUpdate()
     {
         Movement();
         callingJump();
-        backOnGround(); // (Temp)
+        
     }
 }

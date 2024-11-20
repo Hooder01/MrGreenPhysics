@@ -7,6 +7,7 @@ TagManager:
   - DeathZone
   - HUD
   - Slopes
+  - Floors
   layers:
   - Default
   - TransparentFX
