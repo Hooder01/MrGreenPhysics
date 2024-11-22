@@ -102,7 +102,7 @@ public class BasicMovement : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Floors")) // Sonic (or the jumpball) looks for the "Floors" tag which has been added to the "Ground" objects in the test world
         {
-            Debug.Log(callBug[3]); 
+            
             isOnGround = true;
             callingModelSelf.SetActive(true);
             callingJumpBall.SetActive(false);
