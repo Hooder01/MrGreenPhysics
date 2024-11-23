@@ -4539,8 +4539,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110.9, y: -85.3}
-  m_SizeDelta: {x: 138.92859, y: 61.2613}
+  m_AnchoredPosition: {x: 95.47, y: -70.76}
+  m_SizeDelta: {x: 179.3557, y: 94.33496}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1130182574
 MonoBehaviour:
@@ -10908,7 +10908,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4835078630258379571, guid: 3316f056efe5dac4197ec2c23bb94ebc, type: 3}
+  - {fileID: 2100000, guid: b95bfabf8fafc624897302d1d37eb888, type: 2}
   - {fileID: -4973734387028869240, guid: 3316f056efe5dac4197ec2c23bb94ebc, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -11064,7 +11064,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2187202483406825298, guid: 3316f056efe5dac4197ec2c23bb94ebc, type: 3}
+  - {fileID: 2100000, guid: b95bfabf8fafc624897302d1d37eb888, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14910,11 +14910,11 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f6a05f9d36abc9d4d882ab4d55cde812, type: 2}
+  - {fileID: 2100000, guid: b95bfabf8fafc624897302d1d37eb888, type: 2}
   - {fileID: 2100000, guid: f6a05f9d36abc9d4d882ab4d55cde812, type: 2}
   - {fileID: 2100000, guid: f6a05f9d36abc9d4d882ab4d55cde812, type: 2}
   - {fileID: 2100000, guid: b95bfabf8fafc624897302d1d37eb888, type: 2}
-  - {fileID: 2100000, guid: f6a05f9d36abc9d4d882ab4d55cde812, type: 2}
+  - {fileID: 2100000, guid: b95bfabf8fafc624897302d1d37eb888, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16509,6 +16509,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067320585249826586, guid: a268e7226b5c30a45b571c5af1404e02,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6860878369935600126, guid: a268e7226b5c30a45b571c5af1404e02,
         type: 3}
@@ -18657,7 +18662,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4835078630258379571, guid: 3316f056efe5dac4197ec2c23bb94ebc, type: 3}
+  - {fileID: 2100000, guid: b95bfabf8fafc624897302d1d37eb888, type: 2}
   - {fileID: -4973734387028869240, guid: 3316f056efe5dac4197ec2c23bb94ebc, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0

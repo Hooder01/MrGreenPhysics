@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,14 +7,13 @@ public class RingSpin : MonoBehaviour
     GameObject Ring; 
     AudioSource soundEffect;
 
-    bool playEffect;
+    bool hasPlayerTouched;
 
     void Start()
     {
-        Ring = GameObject.Find("ringModelBase");
-        Ring.SetActive(true);
-        playEffect = false;
+        Ring = GameObject.Find("RingPrefab");
         soundEffect = GetComponent<AudioSource>();
+        hasPlayerTouched = false;
     }
 
     void defaultStance()
@@ -25,15 +24,7 @@ public class RingSpin : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        playEffect = true;
-
-        if(playEffect == true)
-        {
-            soundEffect.Play();
-            
-        }
-
-        
+        soundEffect.Play();
     }
 
     void FixedUpdate()
