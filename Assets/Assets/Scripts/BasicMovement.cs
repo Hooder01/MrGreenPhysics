@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*public class MassAndPhys
+public class HomingAttack
 {
-    private float sonicMassOnAverage;
-    private float gravityPullAverage = -5.0f;
-    // (Gravity also for easy editing) (CURRENT NOT IN USE!)
-}*/
+    static void isDash()
+    {
+        bool isSonicInAir;
+
+
+    }
+}
 
 public class BasicMovement : MonoBehaviour
 {
@@ -23,10 +26,8 @@ public class BasicMovement : MonoBehaviour
     private float BaseJump =  5; // (Edit this if you don't like the float of the jump)
     public GameObject callingJumpBall; //(set these both to private in the future)
     public GameObject callingModelSelf; //
-    bool isOnGround;
-    float ballcenter = 0.0f;
-    float ballradius = 0.5f;
-    // (all jumping related, DO NOT REMOVE THESE BOOLEANS!)
+    
+    
 
     private Rigidbody rb; 
 
@@ -35,17 +36,9 @@ public class BasicMovement : MonoBehaviour
     {
         
         callingJumpBall.SetActive(false);
-        callingModelSelf.SetActive(true); 
-        isOnGround = true;
-        
-        
-        //MassAndPhys classObject = new MassAndPhys(); // (calling public Mass and Physics class)
+        callingModelSelf.SetActive(true);  
 
         rb = GetComponent<Rigidbody>();
-
-        //rb.mass = sonicMassOnAverage;
-
-        //Physics.gravity = new Vector3(0, gravityPullAverage, 0); // (This is called off since it intefears with jumpCalling atm)
         
     }
 
@@ -66,35 +59,29 @@ public class BasicMovement : MonoBehaviour
         {
             BaseSpeed = maxCapSpeed;
         }
-        // return to a base speed?
 
-        
+        //
+        float smoothTurning = 5f; 
 
         if (movement != Vector3.zero) 
         {
             Quaternion rotateTarget = Quaternion.LookRotation(movement);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotateTarget, 5 /*edit this number for smooth turning*/ * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotateTarget, smoothTurning  * Time.deltaTime);
         }
-        // rotates Sonic to the pressed input in question
-
-        //
+        // Rotation Context
         
     }
 
 
     void callingJump()
     {
+
         if(Input.GetKeyDown("space"))
         {
-            isOnGround = false; // this dosesn't do anything (fix that)
-            
-            rb.AddForce(0, BaseJump , 0 , ForceMode.Impulse); 
-            callingJumpBall.SetActive(true);
+            rb.AddForce(0, BaseJump , 0 , ForceMode.Impulse);
             callingModelSelf.SetActive(false);
-            if(Input.GetKeyDown("space") & Input.GetKeyDown("space")) // (if player tries to double jump)
-            {
-                Debug.Log(callBug[5]);
-            }
+            callingJumpBall.SetActive(true);
+            
         }
     }
 
@@ -102,16 +89,8 @@ public class BasicMovement : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Floors")) // Sonic (or the jumpball) looks for the "Floors" tag which has been added to the "Ground" objects in the test world
         {
-            
-            isOnGround = true;
-            callingModelSelf.SetActive(true);
             callingJumpBall.SetActive(false);
-
-            if(isOnGround != true && callingJumpBall != false && callingModelSelf == true)
-            {
-                Debug.Log(callBug[4]); // (FailSafe)
-                // restart scene!
-            }
+            callingModelSelf.SetActive(true);
         }
     }
 

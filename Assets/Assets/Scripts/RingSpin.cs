@@ -7,13 +7,11 @@ public class RingSpin : MonoBehaviour
     GameObject Ring; 
     AudioSource soundEffect;
 
-    bool hasPlayerTouched;
 
     void Start()
     {
         Ring = GameObject.Find("RingPrefab");
         soundEffect = GetComponent<AudioSource>();
-        hasPlayerTouched = false;
     }
 
     void defaultStance()
