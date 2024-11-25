@@ -2,34 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomingAttack
-{
-    static void isDash()
-    {
-        bool isSonicInAir;
 
-
-    }
-}
 
 public class BasicMovement : MonoBehaviour
 {
     string[] callBug = { "JumpBall Found!", "JumpBall NOT Found!", "Sonic Mesh Found!", "Collision Found!", "This Item is not being called", "this item is working!" }; // An Array of Debug commands that can be called anywhere (only USE with Debug.Log)
 
     public float BaseSpeed = 1f; 
-    private float acceleration = 1f;
-    private float maxCapSpeed = 60f;
+    public float MoveAccell = 1f;
+    private float TopSpeed = 55f;
     // basic speed values (ONLY change these for easy editing)
 
     
 
-    private float BaseJump =  5; // (Edit this if you don't like the float of the jump)
+    private float BaseJump =  1; // (Edit this if you don't like the float of the jump)
     public GameObject callingJumpBall; //(set these both to private in the future)
     public GameObject callingModelSelf; //
     
-    
-
     private Rigidbody rb; 
+    
 
 
     void Start()
@@ -39,6 +30,7 @@ public class BasicMovement : MonoBehaviour
         callingModelSelf.SetActive(true);  
 
         rb = GetComponent<Rigidbody>();
+        
         
     }
 
@@ -53,12 +45,7 @@ public class BasicMovement : MonoBehaviour
 
         rb.MovePosition(transform.position + movement);
 
-        BaseSpeed += acceleration * Time.deltaTime;
-
-        if(BaseSpeed > maxCapSpeed)
-        {
-            BaseSpeed = maxCapSpeed;
-        }
+       
 
         //
         float smoothTurning = 5f; 
@@ -85,7 +72,7 @@ public class BasicMovement : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision) // Sonic can now collide with anything (as long as he has his colider attached)
+    void OnCollisionEnter(Collision collision) // Sonic can now collide with anything (as long as he has his colider attached) (quite a good chunk of this could be changed)
     {
         if(collision.gameObject.CompareTag("Floors")) // Sonic (or the jumpball) looks for the "Floors" tag which has been added to the "Ground" objects in the test world
         {

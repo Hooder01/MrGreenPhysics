@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SonicSoundControl : MonoBehaviour
 {
-    AudioSource callingJump;
+   public AudioSource callingJump;
+  
+
 
     void Start()
     {
@@ -20,6 +22,8 @@ public class SonicSoundControl : MonoBehaviour
         }
     }
     
+    
+
     void FixedUpdate()
     {
         JumpEffect();
