@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// Most of this is really sh*t code that needs re done
 
 public class BasicMovement : MonoBehaviour
 {
     string[] callBug = { "JumpBall Found!", "JumpBall NOT Found!", "Sonic Mesh Found!", "Collision Found!", "This Item is not being called", "this item is working!" }; // An Array of Debug commands that can be called anywhere (only USE with Debug.Log)
 
     public float BaseSpeed = 1f; 
-    public float MoveAccell = 1f;
-    private float TopSpeed = 55f;
-    // basic speed values (ONLY change these for easy editing)
-
+    //public float MoveAccell = 1f;
+    //private float TopSpeed = 55f;
     
 
     private float BaseJump =  1; // (Edit this if you don't like the float of the jump)
@@ -25,13 +23,11 @@ public class BasicMovement : MonoBehaviour
 
     void Start()
     {
-        
         callingJumpBall.SetActive(false);
         callingModelSelf.SetActive(true);  
 
         rb = GetComponent<Rigidbody>();
-        
-        
+        Homing.airDash();
     }
 
     
@@ -62,6 +58,7 @@ public class BasicMovement : MonoBehaviour
 
     void callingJump()
     {
+        
 
         if(Input.GetKeyDown("space"))
         {
@@ -69,6 +66,10 @@ public class BasicMovement : MonoBehaviour
             callingModelSelf.SetActive(false);
             callingJumpBall.SetActive(true);
             
+            if(isPlayerInAir = true)
+            {
+                Debug.Log("Active");
+            }
         }
     }
 
