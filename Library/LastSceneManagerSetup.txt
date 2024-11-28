@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/SampleScene 1.unity
+- path: Assets/NEWLateNov/Scenes/GHZ/Act01GHZ.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

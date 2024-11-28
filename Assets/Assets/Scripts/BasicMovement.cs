@@ -2,32 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Most of this is really sh*t code that needs re done
+
 
 public class BasicMovement : MonoBehaviour
 {
-    string[] callBug = { "JumpBall Found!", "JumpBall NOT Found!", "Sonic Mesh Found!", "Collision Found!", "This Item is not being called", "this item is working!" }; // An Array of Debug commands that can be called anywhere (only USE with Debug.Log)
+    //Script Ref (make sure you have all the right scripts set up in the inspector)
+    public SpeedValues script;
+    //
 
-    public float BaseSpeed = 1f; 
-    //public float MoveAccell = 1f;
-    //private float TopSpeed = 55f;
+    public GameObject callingJumpBall; 
+    public GameObject callingModelSelf; 
+    
+    private Rigidbody rb;
+    
     
 
-    private float BaseJump =  1; // (Edit this if you don't like the float of the jump)
-    public GameObject callingJumpBall; //(set these both to private in the future)
-    public GameObject callingModelSelf; //
-    
-    private Rigidbody rb; 
-    
-
+    private float baseJump = 5f;
+    private bool alreadyInAir;
 
     void Start()
     {
         callingJumpBall.SetActive(false);
         callingModelSelf.SetActive(true);  
-
+        alreadyInAir = false;
         rb = GetComponent<Rigidbody>();
-        Homing.airDash();
+        
     }
 
     
@@ -36,13 +35,12 @@ public class BasicMovement : MonoBehaviour
     {
         float moveAlongX = Input.GetAxis("Horizontal");
         float moveAlongZ = Input.GetAxis("Vertical");
-
-        Vector3 movement = new Vector3(moveAlongX, 0, moveAlongZ) * BaseSpeed * Time.deltaTime;
+      
+        Vector3 movement = new Vector3(moveAlongX, 0, moveAlongZ)* script.BaseSpeed * Time.deltaTime;
 
         rb.MovePosition(transform.position + movement);
 
        
-
         //
         float smoothTurning = 5f; 
 
@@ -55,30 +53,47 @@ public class BasicMovement : MonoBehaviour
         
     }
 
-
     void callingJump()
     {
         
-
         if(Input.GetKeyDown("space"))
         {
-            rb.AddForce(0, BaseJump , 0 , ForceMode.Impulse);
+            rb.AddForce(0, baseJump , 0 , ForceMode.Impulse);
             callingModelSelf.SetActive(false);
             callingJumpBall.SetActive(true);
-            
-            if(isPlayerInAir = true)
-            {
-                Debug.Log("Active");
-            }
+            alreadyInAir = true;
         }
     }
 
-    void OnCollisionEnter(Collision collision) // Sonic can now collide with anything (as long as he has his colider attached) (quite a good chunk of this could be changed)
+    // PUT THESE TWO IN THE SAME METHOD!
+
+    void homingCancel() // TEMP
+    {
+        private float fallFoward = 4f;
+        if(alreadyInAir == true)
+        {
+            rb.AddForce(fallFoward, 0 , 0 , ForceMode.Impulse);
+            script.BaseSpeed++
+            if(script.BaseSpeed > 10)// (will not receive any extra speed)
+            {
+                Debug.Log("Logic to go here!");
+            } 
+        }
+    }
+
+    
+
+    void OnCollisionEnter(Collision collision) 
     {
         if(collision.gameObject.CompareTag("Floors")) // Sonic (or the jumpball) looks for the "Floors" tag which has been added to the "Ground" objects in the test world
         {
             callingJumpBall.SetActive(false);
             callingModelSelf.SetActive(true);
+
+            if(script.BaseSpeed >= script.MaxSpeedLimit) // Fix this!!
+            {
+                script.BaseSpeed--;
+            } // (temp momentum)
         }
     }
 
@@ -87,6 +102,6 @@ public class BasicMovement : MonoBehaviour
     {
         Movement();
         callingJump();
-        
+        homingCancel();
     }
 }
