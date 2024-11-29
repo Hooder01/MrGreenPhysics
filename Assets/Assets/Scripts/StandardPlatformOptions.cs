@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StandardPlatformOptions : MonoBehaviour 
+/*public class StandardPlatformOptions : MonoBehaviour 
 {
     public float movementOnX;
     public float movementOnY;
@@ -19,7 +19,7 @@ public class StandardPlatformOptions : MonoBehaviour
     {
         transform.position = transform.position + new Vector3(movementOnX, movementOnY, movementOnZ * movementSpeed * Time.deltaTime);
     }
-}
+}*/
 
 
 // easy to use platform for your own levels!

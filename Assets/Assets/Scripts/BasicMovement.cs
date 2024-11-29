@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class BasicMovement : MonoBehaviour
+/*public class BasicMovement : MonoBehaviour
 {
     //Script Ref (make sure you have all the right scripts set up in the inspector)
     public SpeedValues script;
@@ -104,4 +104,4 @@ public class BasicMovement : MonoBehaviour
         callingJump();
         homingCancel();
     }
-}
+}*/

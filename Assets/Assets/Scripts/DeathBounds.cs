@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathBounds : MonoBehaviour
+/*public class DeathBounds : MonoBehaviour
 {
 
     private GameObject callPlayer; 
@@ -25,4 +25,4 @@ public class DeathBounds : MonoBehaviour
     }
 
     
-}
+}*/
