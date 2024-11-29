@@ -67,7 +67,7 @@ public class BasicMovement : MonoBehaviour
 
     // PUT THESE TWO IN THE SAME METHOD!
 
-    void homingCancel() // TEMP
+    /*void homingCancel() // TEMP
     {
         private float fallFoward = 4f;
         if(alreadyInAir == true)
@@ -79,7 +79,7 @@ public class BasicMovement : MonoBehaviour
                 Debug.Log("Logic to go here!");
             } 
         }
-    }
+    }*/
 
     
 
@@ -90,10 +90,7 @@ public class BasicMovement : MonoBehaviour
             callingJumpBall.SetActive(false);
             callingModelSelf.SetActive(true);
 
-            if(script.BaseSpeed >= script.MaxSpeedLimit) // Fix this!!
-            {
-                script.BaseSpeed--;
-            } // (temp momentum)
+            
         }
     }
 
@@ -102,6 +99,6 @@ public class BasicMovement : MonoBehaviour
     {
         Movement();
         callingJump();
-        homingCancel();
+        
     }
 }
