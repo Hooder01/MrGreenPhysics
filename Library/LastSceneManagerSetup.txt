@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/CinnyTestStage.unity
+- path: Assets/Scenes/SSH/SeasideTestZone.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
