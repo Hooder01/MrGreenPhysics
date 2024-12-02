@@ -7,12 +7,13 @@ public class GlobalValues : MonoBehaviour
     //
     [Header("On_Ground_Control")]
     public float baseSpeed;
-    float acceleration_speed;
-    float deceleration_speed;
-    float top_speed;
-    
+    public float accelerationSpeed;
+    public float decelerationSpeed;
+    public float topSpeed;
     //
 
-    
+    [Header("In_Air_Control")]
+    public bool playerInAir;
+    //
     
 }

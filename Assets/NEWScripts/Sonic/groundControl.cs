@@ -23,6 +23,8 @@ public class groundControl : MonoBehaviour
 
         rb.MovePosition(transform.position + baseMovement);
 
+        
+
         //
         float smoothTurning = 5f; 
 
@@ -33,8 +35,21 @@ public class groundControl : MonoBehaviour
         }
         // Rotation Context
         
+
+        
+        script.baseSpeed += script.accelerationSpeed * Time.deltaTime;
+        //Takes the values from global, Base and acceleration. Putting these two in a addition assignment operator then multiplyed in each updated frame
+        if(script.baseSpeed == 10)
+        {
+            script.baseSpeed = script.topSpeed;
+            if(script.baseSpeed == script.topSpeed) // DEBUG!!
+            {
+                Debug.Log(script.topSpeed);
+            }
+        }
     }
 
+   
 
     void FixedUpdate()
     {
