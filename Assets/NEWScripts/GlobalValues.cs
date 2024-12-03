@@ -14,6 +14,7 @@ public class GlobalValues : MonoBehaviour
 
     [Header("In_Air_Control")]
     public bool playerInAir;
+    public float jumpForce;
     //
     
 }

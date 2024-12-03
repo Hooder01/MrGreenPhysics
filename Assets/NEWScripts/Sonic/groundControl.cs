@@ -5,12 +5,15 @@ using UnityEngine;
 public class groundControl : MonoBehaviour
 {
     private Rigidbody rb;
+    private Animator animator;
 
     public GlobalValues script;
+    public GameObject ModelSelf;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator.GetComponent<Animator>();
     }
 
     
@@ -23,9 +26,6 @@ public class groundControl : MonoBehaviour
 
         rb.MovePosition(transform.position + baseMovement);
 
-        
-
-        //
         float smoothTurning = 5f; 
 
         if (baseMovement != Vector3.zero) 
@@ -33,9 +33,6 @@ public class groundControl : MonoBehaviour
             Quaternion rotateTarget = Quaternion.LookRotation(baseMovement);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotateTarget, smoothTurning  * Time.deltaTime);
         }
-        // Rotation Context
-        
-
         
         script.baseSpeed += script.accelerationSpeed * Time.deltaTime;
         //Takes the values from global, Base and acceleration. Putting these two in a addition assignment operator then multiplyed in each updated frame
@@ -49,7 +46,18 @@ public class groundControl : MonoBehaviour
         }
     }
 
-   
+   void OnCollisionEnter(Collision collision) // ( TEMP )
+   {
+        if(collision.gameObject.CompareTag("DeathZone"))
+        {
+            script.baseSpeed = 0;
+        }
+
+        if(collision.gameObject.CompareTag("Floors"))
+        {
+            ModelSelf.SetActive(true);
+        }
+   }
 
     void FixedUpdate()
     {
