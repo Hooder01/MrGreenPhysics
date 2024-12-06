@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class airControl : MonoBehaviour
 {
-    public GameObject callingJumpBall;
+    
     public GlobalValues script;
     private Rigidbody rb;
+    private bool playerInAir;
 
     void Start()
     {
-        callingJumpBall.SetActive(false);
-        script.playerInAir = false;
+        script.callingJumpBall.SetActive(false);
+
         rb = GetComponent<Rigidbody>();
     }
 
@@ -19,19 +20,23 @@ public class airControl : MonoBehaviour
     {
         script.jumpForce = 6.1f;
 
-        if(Input.GetKeyDown("space"))
+        if(Input.GetKeyDown("space") & !playerInAir)
         {
-            script.playerInAir = true;
             rb.AddForce(transform.up * script.jumpForce, ForceMode.Impulse);
-            callingJumpBall.SetActive(true);
+            
+            playerInAir = true;
         }
-        /*else
-        {
-            callingJumpBall.SetActive(false);
-        }*/
     }
 
-
+    void OnCollisionEnter(Collision collision) 
+   {
+        if(collision.gameObject.CompareTag("Floors"))
+        {
+            
+            playerInAir = false;
+        }
+        
+   } 
 
     void Update()
     {

@@ -6,9 +6,9 @@ public class groundControl : MonoBehaviour
 {
     private Rigidbody rb;
     private Animator animator;
+    
 
     public GlobalValues script;
-    public GameObject ModelSelf;
 
     void Start()
     {
@@ -34,19 +34,18 @@ public class groundControl : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, rotateTarget, smoothTurning  * Time.deltaTime);
         }
         
-        script.baseSpeed += script.accelerationSpeed * Time.deltaTime;
-        //Takes the values from global, Base and acceleration. Putting these two in a addition assignment operator then multiplyed in each updated frame
-        if(script.baseSpeed == 10)
+        script.baseSpeed += script.accelerationSpeed  * Time.deltaTime;
+        // (Putting these two in a addition assignment operator then multiplyed in each updated frame)
+
+        
+        if(script.baseSpeed == script.topSpeed)
         {
-            script.baseSpeed = script.topSpeed;
-            if(script.baseSpeed == script.topSpeed) // DEBUG!!
-            {
-                Debug.Log(script.topSpeed);
-            }
+            Debug.Log("working?"); // call a stronger mass
         }
+        
     }
 
-   void OnCollisionEnter(Collision collision) // ( TEMP )
+   void OnCollisionEnter(Collision collision) 
    {
         if(collision.gameObject.CompareTag("DeathZone"))
         {
@@ -55,9 +54,10 @@ public class groundControl : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Floors"))
         {
-            ModelSelf.SetActive(true);
+            script.modelSelf.SetActive(true);
         }
-   }
+        
+   } // ( TEMP ) // this is bad code (will fix at a later date!)
 
     void FixedUpdate()
     {

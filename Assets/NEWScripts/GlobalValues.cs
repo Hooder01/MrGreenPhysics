@@ -13,7 +13,8 @@ public class GlobalValues : MonoBehaviour
     //
 
     [Header("In_Air_Control")]
-    public bool playerInAir;
+    public GameObject callingJumpBall;
+    public GameObject modelSelf;
     public float jumpForce;
     //
     
