@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SSH/SeasideTestZone.unity
+    guid: 4e3e5d32f45e3084d9bad73d48d5a5ec
   m_configObjects: {}
